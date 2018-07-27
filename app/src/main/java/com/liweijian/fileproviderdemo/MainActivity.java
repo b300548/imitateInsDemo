@@ -14,6 +14,9 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -45,14 +48,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final int STORAGE_PERMISSIONS_REQUEST_CODE = 0x04;
     private File fileUri = new File(Environment.getExternalStorageDirectory().getPath() + File.separator+"photo.jpg");
     private File fileCropUri = new File(Environment.getExternalStorageDirectory().getPath() + File.separator+"crop_photo.jpg");
-    private Uri imageUri;
-    private Uri cropImageUri;
+    public static Uri imageUri;
+    public static Uri cropImageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ViewUtils.inject(this);
+
+
     }
 
 
@@ -149,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Log.i("onActivityResule",Integer.toString(resultCode));
 
-        if (resultCode == RESULT_OK) {
+//        if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 //拍照完成回调
                 case CODE_CAMERA_REQUEST:
@@ -159,28 +164,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 //访问相册完成回调
                 case CODE_GALLERY_REQUEST:
-                    Log.i("test","相册回调");
-                    if (hasSdcard()) {
-                        cropImageUri = Uri.fromFile(fileCropUri);
-                        Uri newUri = Uri.parse(PhotoUtils.getPath(this, data.getData()));
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                            newUri = FileProvider.getUriForFile(this, "com.liweijian.fileproviderdemo", new File(newUri.getPath()));
+                    if (resultCode == RESULT_OK) {
+                        Log.i("test", "相册回调");
+                        if (hasSdcard()) {
+                            cropImageUri = Uri.fromFile(fileCropUri);
+                            Uri newUri = Uri.parse(PhotoUtils.getPath(this, data.getData()));
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                newUri = FileProvider.getUriForFile(this, "com.liweijian.fileproviderdemo", new File(newUri.getPath()));
+                            }
+                            PhotoUtils.cropImageUri(this, newUri, cropImageUri, 1, 1, OUTPUT_X, OUTPUT_Y, CODE_RESULT_REQUEST);
+                        } else {
+                            ToastUtils.showShort(this, "设备没有SD卡！");
                         }
-                        PhotoUtils.cropImageUri(this, newUri, cropImageUri, 1, 1, OUTPUT_X, OUTPUT_Y, CODE_RESULT_REQUEST);
-                    } else {
-                        ToastUtils.showShort(this, "设备没有SD卡！");
+                        break;
                     }
-                    break;
                 case CODE_RESULT_REQUEST:
-                    Log.i("test","裁剪回调");
-                    Bitmap bitmap = PhotoUtils.getBitmapFromUri(cropImageUri, this);
-                    if (bitmap != null) {
-                        showImages(bitmap);
+                    if (resultCode == RESULT_OK) {
+                        Log.i("test", "裁剪回调");
+                        Bitmap bitmap = PhotoUtils.getBitmapFromUri(cropImageUri, this);
+                        if (bitmap != null) {
+                            showImages(bitmap);
+                        }
+                        break;
                     }
-                    break;
                 default:
             }
-        }
+//        }
     }
 
 
@@ -212,5 +221,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return state.equals(Environment.MEDIA_MOUNTED);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.item,menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                Intent intent1 = new Intent();
+                setResult(2,intent1);
+                finish();
+            case R.id.next:
+                if (MainActivity.cropImageUri == null)
+                    ToastUtils.showShort(MainActivity.this,"请选择照片");
+                else {
+                    Intent intent = new Intent();
+                    intent.setClass(MainActivity.this, TextEdit.class);
+                    startActivity(intent);
+                }
+        }
+        return true;
+    }
 }

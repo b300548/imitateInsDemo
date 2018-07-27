@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="20dp"
+    android:orientation="vertical"
+    tools:context="com.liweijian.fileproviderdemo.publish">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+        <ImageView
+            android:id="@+id/image_publish"
+            android:layout_width="60dp"
+            android:layout_height="60dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="添加说明..."
+            android:textSize="10dp"
+            android:gravity="top"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@drawable/layout_shape">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="添加标记"
+            android:textSize="20sp"
+            android:layout_alignParentLeft="true"
+            android:textColor="#000000"/>
+
+        <Button
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:background="@android:drawable/ic_menu_more" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/layout_shape"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="添加地点"
+            android:textSize="20sp"
+            android:layout_alignParentLeft="true"
+            android:textColor="#000000"/>
+
+        <Button
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:background="@android:drawable/ic_menu_more" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="vertical"
+        android:background="@drawable/layout_shape">
+
+        <Switch
+            android:id="@+id/fb_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Facebook"
+            android:textSize="20sp"
+            android:scrollbarSize="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"/>
+
+        <Switch
+            android:id="@+id/tw_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Twitter"
+            android:textSize="20dp"
+            android:scrollbarSize="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"/>
+
+        <Switch
+            android:id="@+id/tum_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tumblr"
+            android:scrollbarSize="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:textSize="20sp"/>
+
+        <Switch
+            android:id="@+id/weibo_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="新浪微博"
+            android:textSize="20sp"
+            android:scrollbarSize="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            />
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--&gt;-->
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Facebook"-->
+                <!--android:textSize="20sp"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:textColor="#000000"/>-->
+
+            <!--<Button-->
+                <!--android:layout_width="20dp"-->
+                <!--android:layout_height="20dp"-->
+                <!--android:layout_alignParentEnd="true"-->
+                <!--android:background="@android:drawable/ic_menu_more" />-->
+        <!--</RelativeLayout>-->
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="高级设置"
+            android:textSize="15sp" />
+
+        <Button
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:background="@android:drawable/arrow_down_float" />
+    </LinearLayout>
+
+
+
+</LinearLayout>
