@@ -12,7 +12,6 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-import android.util.Log;
 
 /**
  * @author zhengzhong on 2016/8/6 16:16
@@ -27,13 +26,9 @@ public class PhotoUtils {
      * @param requestCode 调用系统相机请求码
      */
     public static void takePicture(Activity activity, Uri imageUri, int requestCode) {
-        Log.i("test","打开相机");
-        Log.i("test",imageUri.toString());
-
         //调用系统相机
         Intent intentCamera = new Intent();
         intentCamera.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-        intentCamera.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         //将拍照结果保存至photo_file的Uri中，不保留在相册中
         intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
         activity.startActivityForResult(intentCamera, requestCode);
@@ -44,7 +39,6 @@ public class PhotoUtils {
      * @param requestCode 打开相册的请求码
      */
     public static void openPic(Activity activity, int requestCode) {
-        Log.i("test","打开相册");
         Intent photoPickerIntent = new Intent(Intent.ACTION_GET_CONTENT);
         photoPickerIntent.setType("image/*");
         activity.startActivityForResult(photoPickerIntent, requestCode);
@@ -60,12 +54,10 @@ public class PhotoUtils {
      * @param height      剪裁图片高度
      * @param requestCode 剪裁图片的请求码
      */
-    public static void cropImageUri(Activity activity, Uri orgUri, Uri desUri, int aspectX, int aspectY, int width, int height, int requestCode) {
-        Log.i("test","裁剪图片");
+    public static void cropImageUri(Activity activity, Uri orgUri, Uri desUri, double aspectX, double aspectY, int width, int height, int requestCode) {
         Intent intent = new Intent("com.android.camera.action.CROP");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         }
         intent.setDataAndType(orgUri, "image/*");
         //发送裁剪信号

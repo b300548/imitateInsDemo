@@ -12,7 +12,7 @@
         android:layout_width="400dp"
         android:layout_height="400dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/circle" />
+         />
 
     <Button
         android:id="@+id/takePic"
