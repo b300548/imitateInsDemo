@@ -1,8 +1,6 @@
 package com.liweijian.fileproviderdemo.app;
 
-/**
- * Created by cretin on 15/12/30.
- */
+
 public class AppConstants {
     /**
      * 指定在MyRelativeLayout中滑动的方向

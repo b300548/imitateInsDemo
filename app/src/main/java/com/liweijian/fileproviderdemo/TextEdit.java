@@ -113,8 +113,7 @@ public class TextEdit extends AppCompatActivity implements MyRelativeLayout.MyRe
                 break;
             case R.id.save: {
                 editedbitmap = ImageUtils.createViewBitmap(rela, rela.getWidth(), rela.getHeight());
-                String fileName = "CRETIN_" + new SimpleDateFormat("yyyyMMdd_HHmmss")
-                        .format(new Date()) + ".png";
+                String fileName =  new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + ".png";
                 String result = ImageUtils.saveBitmapToFile(editedbitmap, fileName);
                 Toast.makeText(TextEdit.this, "保存位置:" + result, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent();

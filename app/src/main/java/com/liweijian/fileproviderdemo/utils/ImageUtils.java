@@ -19,13 +19,11 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by cretin on 15/12/22.
- */
+
 public class ImageUtils {
     private static final int TYPE_FILE_IMAGE = 1;
     private static final int TYPE_FILE_VEDIO = 2;
-    private static final String FILE_ROOT_PATH = "/sdcard/cretin/";
+    private static final String FILE_ROOT_PATH = "/sdcard/insimage/";
 
     /***
      * 动态设置inSampleSize 倍数

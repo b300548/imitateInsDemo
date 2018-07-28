@@ -26,13 +26,11 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 
-
-/**
- * @author zhengzhong on 2016/8/6 16:16
- * Email zheng_zhong@163.com
- */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "MainActivity";
     @ViewInject(R.id.photo)
@@ -46,8 +44,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final int CODE_RESULT_REQUEST = 0xa2;
     private static final int CAMERA_PERMISSIONS_REQUEST_CODE = 0x03;
     private static final int STORAGE_PERMISSIONS_REQUEST_CODE = 0x04;
-    private File fileUri = new File(Environment.getExternalStorageDirectory().getPath() + File.separator+"photo.jpg");
-    private File fileCropUri = new File(Environment.getExternalStorageDirectory().getPath() + File.separator+"crop_photo.jpg");
+    private File fileUri = new File(Environment.getExternalStorageDirectory().getPath()+File.separator + new SimpleDateFormat("yyyyMMdd-HHmmss", Locale.CHINA)
+            .format(new Date())+"photo.jpg");
+    private File fileCropUri = new File(Environment.getExternalStorageDirectory().getPath() +File.separator+ new SimpleDateFormat("yyyyMMdd-HHmmss", Locale.CHINA)
+            .format(new Date())+"crop_photo.jpg");
     public static Uri imageUri;
     public static Uri cropImageUri;
 
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         ViewUtils.inject(this);
 
-
+        setTitle("选择照片");
     }
 
 
