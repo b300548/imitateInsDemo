@@ -2,7 +2,7 @@
 <resources>
 <paths>
     <external-path
-        name="demophoto"
+        name="image"
         path="" />
 </paths>
     </resources>
