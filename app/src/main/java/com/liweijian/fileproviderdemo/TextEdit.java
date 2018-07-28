@@ -52,11 +52,7 @@ public class TextEdit extends AppCompatActivity implements MyRelativeLayout.MyRe
      */
     @Override
     public void touchMoveCallBack(int direction) {
-        if (direction == AppConstants.MOVE_LEFT) {
-            Toast.makeText(TextEdit.this, "你在向左滑动！", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(TextEdit.this, "你在向右滑动！", Toast.LENGTH_SHORT).show();
-        }
+
     }
 
     /**
@@ -66,12 +62,12 @@ public class TextEdit extends AppCompatActivity implements MyRelativeLayout.MyRe
      */
     @Override
     public void onTextViewMoving(TextView textView) {
-        Log.d(TAG, "TextView正在滑动");
+
     }
 
     @Override
     public void onTextViewMovingDone() {
-        Toast.makeText(TextEdit.this, "标签TextView滑动完毕！", Toast.LENGTH_SHORT).show();
+
     }
 
     public void btnClickExplain(View view) {
@@ -108,7 +104,6 @@ public class TextEdit extends AppCompatActivity implements MyRelativeLayout.MyRe
         switch (item.getItemId())
         {
             case android.R.id.home:
-                Intent intent1 = new Intent();
                 finish();
                 break;
             case R.id.save: {

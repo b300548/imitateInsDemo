@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Log.i("onActivityResule",Integer.toString(resultCode));
 
-//        if (resultCode == RESULT_OK) {
+        if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 //拍照完成回调
                 case CODE_CAMERA_REQUEST:
@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 //访问相册完成回调
                 case CODE_GALLERY_REQUEST:
-                    if (resultCode == RESULT_OK) {
+
                         Log.i("test", "相册回调");
                         if (hasSdcard()) {
                             cropImageUri = Uri.fromFile(fileCropUri);
@@ -177,19 +177,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             ToastUtils.showShort(this, "设备没有SD卡！");
                         }
                         break;
-                    }
+
                 case CODE_RESULT_REQUEST:
-                    if (resultCode == RESULT_OK) {
+
                         Log.i("test", "裁剪回调");
                         Bitmap bitmap = PhotoUtils.getBitmapFromUri(cropImageUri, this);
                         if (bitmap != null) {
                             showImages(bitmap);
                         }
                         break;
-                    }
+
                 default:
             }
-//        }
+        }
     }
 
 
