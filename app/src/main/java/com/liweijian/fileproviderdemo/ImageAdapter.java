@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.liweijian.fileproviderdemo.utils.ImageUtils;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
@@ -19,11 +21,11 @@ import java.util.logging.LogRecord;
  */
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> {
-    private List<Bitmap> mList;
+    private List<String> mList;
 
     private Bitmap bm;
 
-    public ImageAdapter(List<Bitmap> list){
+    public ImageAdapter(List<String> list){
         mList = list;
     }
 
@@ -37,19 +39,12 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
-                //String filename = mList.get(position);
-//                Bitmap bitmap = BitmapFactory.decodeFile((String)filename);
-//                ByteArrayOutputStream bos = new ByteArrayOutputStream();
-//                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
-//                byte[] bytes = bos.toByteArray();
-//                bm = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                //bm = BitmapFactory.decodeFile((String)filename);
-                bm = mList.get(position);
+                String filename = mList.get(position);
+                Bitmap bitmap = BitmapFactory.decodeFile((String)filename);
+                bm = ImageUtils.compressBitmap(bitmap);
+               // bm = mList.get(position);
                 MainActivity.setBitmap(bm);
                 GalleryFragment.setImage(bm);
-
-
-
 
     }
 });
@@ -58,16 +53,11 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        //String src = mList.get(position);
+        String src = mList.get(position);
 
-        //Bitmap bitmap = BitmapFactory.decodeFile((String) src);
-//        //mSrcSize = bitmap.getByteCount() + "byte";
-//            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-//            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
-//            byte[] bytes = bos.toByteArray();
-//            bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-        Bitmap bitmap = mList.get(position);
-            holder.imageView.setImageBitmap(bitmap);
+        Bitmap bitmap = BitmapFactory.decodeFile((String) src);
+        Bitmap bm = ImageUtils.compressBitmap(bitmap);
+        holder.imageView.setImageBitmap(bm);
 
     }
 
