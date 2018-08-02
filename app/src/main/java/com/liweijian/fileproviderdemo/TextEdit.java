@@ -40,8 +40,8 @@ public class TextEdit extends AppCompatActivity implements MyRelativeLayout.MyRe
 
     public void initUI() {
         rela = (MyRelativeLayout) findViewById(R.id.id_rela);
-        Bitmap bitmap = PhotoUtils.getBitmapFromUri(MainActivity.cropImageUri,this);
-        rela.setBackGroundBitmap(bitmap);
+        //Bitmap bitmap = PhotoUtils.getBitmapFromUri(MainActivity.cropImageUri,this);
+        rela.setBackGroundBitmap(MainActivity.bitmap);
         rela.setMyRelativeTouchCallBack(this);
     }
 

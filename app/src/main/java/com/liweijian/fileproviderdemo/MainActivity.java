@@ -33,6 +33,9 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "MainActivity";
+
+    public static Bitmap bitmap;
+
     @ViewInject(R.id.photo)
     private ImageView photo;
     @ViewInject(R.id.takePic)
@@ -58,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ViewUtils.inject(this);
 
         setTitle("选择照片");
+        replaceFragment(new GalleryFragment());
     }
 
 
@@ -68,10 +72,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.takePic:
                 Log.i("test","点击打开相机按钮");
                 autoObtainCameraPermission();
+                //replaceFragment(new GalleryFragment());
                 break;
             case R.id.takeGallery:
                 Log.i("test","点击打开相册按钮");
-                autoObtainStoragePermission();
+                replaceFragment(new GalleryFragment());
+                //autoObtainStoragePermission();
                 break;
             default:
         }
@@ -137,7 +143,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     PhotoUtils.openPic(this, CODE_GALLERY_REQUEST);
                 } else {
-
                     ToastUtils.showShort(this, "请允许打开操作SDCard！！");
                 }
                 break;
@@ -237,14 +242,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 setResult(2,intent1);
                 finish();
             case R.id.next:
-                if (MainActivity.cropImageUri == null)
-                    ToastUtils.showShort(MainActivity.this,"请选择照片");
-                else {
-                    Intent intent = new Intent();
-                    intent.setClass(MainActivity.this, TextEdit.class);
-                    startActivity(intent);
-                }
+//                if (MainActivity.cropImageUri == null)
+//                    ToastUtils.showShort(MainActivity.this,"请选择照片");
+//                else {
+//                    Intent intent = new Intent();
+//                    intent.setClass(MainActivity.this, TextEdit.class);
+//                    startActivity(intent);
+//                }
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, TextEdit.class);
+                startActivity(intent);
         }
         return true;
+    }
+
+    private void replaceFragment(android.support.v4.app.Fragment fragment) {
+        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+        android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.frame_layout,fragment);
+        transaction.commit();
+    }
+
+    public static void setBitmap(Bitmap bm){
+        bitmap = bm;
     }
 }

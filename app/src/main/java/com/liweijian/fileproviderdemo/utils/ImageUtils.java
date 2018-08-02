@@ -475,31 +475,38 @@ public class ImageUtils {
      * @return
      */
     public static Bitmap compressBitmap(Bitmap image) {
-        //防止对本数据进行就该
-        Bitmap tempBitmap = image;
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        tempBitmap.compress(Bitmap.CompressFormat.JPEG, 90, baos);
-        ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeStream(isBm, null, options);
-        int height = options.outHeight;
-        int width = options.outWidth;
-        //初始压缩比为1
-        int inSampleSize = 1;
-        // TODO: 16/3/7 动态设置
-        int reqHeight = 1280;
-        int reqWidth = 960;
-        if (height > reqHeight || width > reqWidth) {
-            final int heightRatio = Math.round((float) height / (float) reqHeight);
-            final int widthRatio = Math.round((float) width / (float) reqWidth);
-            inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
+
+            //防止对本数据进行就该
+            Bitmap tempBitmap = image;
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            tempBitmap.compress(Bitmap.CompressFormat.JPEG, 90, baos);
+            ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inJustDecodeBounds = true;
+            BitmapFactory.decodeStream(isBm, null, options);
+            int height = options.outHeight;
+            int width = options.outWidth;
+            //初始压缩比为1
+            int inSampleSize = 1;
+            // TODO: 16/3/7 动态设置
+            int reqHeight = 1280;
+            int reqWidth = 960;
+            if (height > reqHeight || width > reqWidth) {
+                final int heightRatio = Math.round((float) height / (float) reqHeight);
+                final int widthRatio = Math.round((float) width / (float) reqWidth);
+                inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
+            }
+            //重新设置压缩比
+            options.inSampleSize = inSampleSize;
+            options.inJustDecodeBounds = false;
+            options.inPreferredConfig = Bitmap.Config.RGB_565;//降低图片从ARGB888到RGB565
+            isBm = new ByteArrayInputStream(baos.toByteArray());
+            baos.close();
+            return BitmapFactory.decodeStream(isBm, null, options);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        //重新设置压缩比
-        options.inSampleSize = inSampleSize;
-        options.inJustDecodeBounds = false;
-        options.inPreferredConfig = Bitmap.Config.ARGB_8888;//降低图片从ARGB888到RGB565
-        isBm = new ByteArrayInputStream(baos.toByteArray());
-        return BitmapFactory.decodeStream(isBm, null, options);
+        return tempBitmap;
     }
 }
