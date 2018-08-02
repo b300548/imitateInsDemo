@@ -114,6 +114,7 @@ public class TextEdit extends AppCompatActivity implements MyRelativeLayout.MyRe
                 Intent intent = new Intent();
                 intent.setClass(TextEdit.this,publish.class);
                 startActivity(intent);
+                break;
             }
         }
         return true;

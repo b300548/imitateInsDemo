@@ -71,8 +71,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.takePic:
                 Log.i("test","点击打开相机按钮");
-                autoObtainCameraPermission();
+//                autoObtainCameraPermission();
                 //replaceFragment(new GalleryFragment());
+                Intent intent = new Intent(MainActivity.this,CameraActivity.class);
+                startActivity(intent);
                 break;
             case R.id.takeGallery:
                 Log.i("test","点击打开相册按钮");
@@ -237,10 +239,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId())
         {
-            case android.R.id.home:
-                Intent intent1 = new Intent();
-                setResult(2,intent1);
-                finish();
             case R.id.next:
 //                if (MainActivity.cropImageUri == null)
 //                    ToastUtils.showShort(MainActivity.this,"请选择照片");
